@@ -1,0 +1,15 @@
+# Python 自動產生的暫存檔
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虛擬環境
+.venv/
+venv/
+env/
+
+# 環境變數（包含金鑰或密碼）
+.env
+
+# 編輯器設定
+.vscode/
