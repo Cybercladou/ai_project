@@ -34,9 +34,10 @@ app.add_middleware(
         "http://localhost:8000",
         "http://127.0.0.1:8000",
         "https://mower-return-wand.ngrok-free.dev:8000",
+        "https://bug-free-enigma-w9qpv976g5729pv7.github.dev",
         "http://localhost:5500",   # VS Code Live Server
         "http://127.0.0.1:5500",
-        "https://mower-return-wand.ngrok-free.dev:5500",
+        "https://mower-return-wand.ngrok-free.dev:5500"
     ],
     allow_credentials=True,
     allow_methods=["*"],
