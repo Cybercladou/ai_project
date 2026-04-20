@@ -1,0 +1,35 @@
+backend/
+  ├── requirements.txt     # pinned dependencies
+  ├── config.py            # RP_ID, ORIGIN, JWT_SECRET (env-var overridable)
+  ├── database.py          # SQLAlchemy + SQLite setup, get_db() dependency
+  ├── models.py            # User, Credential, AuthSession tables
+  ├── main.py              # FastAPI app, CORS, static file serving
+  └── auth/
+      ├── register.py      # POST /auth/register/start  +  /register/finish
+      └── login.py         # POST /auth/login/start  +  /login/finish  +  GET /me
+
+  index.html was updated with:
+  - @simplewebauthn/browser CDN script
+  - "使用 Passkey 註冊" button in the register modal footer
+  - "使用 Passkey 登入" button in the login modal footer
+  - handlePasskeyRegister() and handlePasskeyLogin() JS functions
+
+  ---
+  
+  [ install ]
+  cd backend
+  pip install -r requirements.txt
+  
+  [ run ]
+  cd backend
+  uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+  Then open http://localhost:8000 — FastAPI serves static site AND the API from the same origin.
+
+  Interactive API docs (great for learning/testing): http://localhost:8000/docs
+
+  [ ngrok forward public domain to locahost ]
+  Execute ngrok then in command prompt
+  > ngrok http 8000
+  
+  Then open https://mower-return-wand.ngrok-free.dev/

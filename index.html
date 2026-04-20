@@ -1,0 +1,2554 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台中旅遊愛好者協會 | 探索美好，共享旅程</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome/all.min.css">
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --ta-green: #00aa6c;
+            --ta-green-dark: #007a4d;
+            --ta-green-light: #e6f7f1;
+            --ta-orange: #f47321;
+            --ta-navy: #3d6b6e;
+            --ta-navy-mid: #4e8285;
+            --ta-sky: #5aadb5;
+            --ta-sand: #f5f0e8;
+            --ta-warm: #fffdf9;
+            --ta-text: #3a5254;
+            --ta-muted: #7a9ea0;
+            --ta-gold: #ffd166;
+            --ta-white-dim: rgba(255, 255, 255, 0.55);
+            --ta-white-mid: rgba(255, 255, 255, 0.7);
+            --ta-white-hi: rgba(255, 255, 255, 0.88);
+            --radius: 18px;
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lift: 0 12px 40px rgba(0, 0, 0, 0.13);
+        }
+
+        /* ===== RESET ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', 'Noto Serif TC', sans-serif;
+            color: var(--ta-text);
+            background: var(--ta-warm);
+            overflow-x: hidden;
+        }
+
+        A {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        A:hover {
+            color: var(--ta-green);
+        }
+
+        .modal-xl {
+            --bs-modal-width: 800px;
+            padding: 1rem;
+        }
+
+        /* ===== NAVBAR ===== */
+        #navbar .navbar {
+            background: rgba(255, 255, 255, 0.97) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--ta-green-light);
+            padding: 0.6rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 170, 108, 0.1);
+        }
+
+        .navbar-brand-custom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            max-width: 170px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .brand-logo-lg {
+            width: 52px;
+            height: 52px;
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .brand-text-main {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--ta-navy);
+            line-height: 1.1;
+        }
+
+        .brand-text-sub {
+            font-size: 0.6rem;
+            color: var(--ta-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--ta-navy) !important;
+            padding: 0.4rem 0.8rem !important;
+            border-radius: 8px;
+            transition: all 0.25s;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link:hover {
+            background: var(--ta-green-light);
+            color: var(--ta-green-dark) !important;
+        }
+
+        .nav-link .fa-solid {
+            display: block;
+            margin: 0 auto !important
+        }
+
+        .btn-register {
+            background: transparent;
+            border: 2px solid var(--ta-sky);
+            color: var(--ta-sky) !important;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 0.35rem 1rem;
+            transition: all 0.25s;
+        }
+
+        .btn-register:hover {
+            background: var(--ta-sky);
+            color: white !important;
+        }
+
+        .btn-login,
+        .btn-logout {
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-green-dark));
+            border: none;
+            color: white !important;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 0.35rem 1.1rem;
+            transition: all 0.25s;
+            box-shadow: 0 3px 12px rgba(0, 170, 108, 0.35);
+        }
+
+        .btn-login:hover,
+        .btn-logout:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 170, 108, 0.45);
+        }
+
+        /* ===== BANNER / HERO ===== */
+        #banner {
+            position: relative;
+            height: 92vh;
+            min-height: 580px;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(160deg, rgba(61, 107, 110, 0.65) 0%, rgba(0, 122, 77, 0.50) 60%, rgba(244, 115, 33, 0.28) 100%),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;
+            transform: scale(1.04);
+            animation: heroZoom 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            from {
+                transform: scale(1.04);
+            }
+
+            to {
+                transform: scale(1.0);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            background: var(--ta-orange);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            text-transform: uppercase;
+            animation: fadeInDown 0.8s ease both;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            /* animation: fadeInUp 0.9s ease 0.2s both; */
+        }
+
+        .wow {
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--ta-white-hi);
+            max-width: 640px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.9s ease 0.4s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.2rem;
+            animation: fadeInUp 0.9s ease 0.5s both;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat:nth-child(2n+1) {
+            min-width: 100px;
+        }
+
+
+        .hero-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--ta-gold);
+            line-height: 1;
+        }
+
+        .hero-stat-number-sup {
+            font-size: 1.2rem;
+        }
+
+        .hero-stat-sep {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.9s ease 0.6s both;
+
+        }
+
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-green-dark));
+            color: white;
+            border: none;
+            padding: 0.85rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 24px rgba(0, 170, 108, 0.4);
+            transition: all 0.3s;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px rgba(0, 170, 108, 0.5);
+            color: white;
+        }
+
+        .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 0.83rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.28);
+            color: white;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--ta-white-mid);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .hero-scroll-label {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+        /* ===== SECTION BASE ===== */
+        section {
+            padding: 90px 0;
+        }
+
+        .section-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ta-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: var(--ta-navy);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--ta-muted);
+            line-height: 1.8;
+            max-width: 640px;
+        }
+
+        .divider-green {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ta-green), var(--ta-orange));
+            border-radius: 2px;
+            margin: 1rem 0 1.5rem;
+        }
+
+        /* ===== TRUST STRIP ===== */
+        .trust-strip {
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-green-dark));
+            padding: 1rem 0;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .trust-item i {
+            font-size: 1.1rem;
+            color: var(--ta-gold);
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--ta-green-light) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-img-wrap {
+            position: relative;
+        }
+
+        .about-main-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lift);
+        }
+
+        .about-accent-img {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            width: 200px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 5px solid white;
+            box-shadow: var(--shadow-lift);
+        }
+
+        .about-badge-float {
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            background: var(--ta-orange);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: var(--shadow-lift);
+        }
+
+        .about-badge-float .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .about-badge-float .lbl {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .about-col-right {
+            transition-delay: 0.15s;
+        }
+
+        .about-body-text {
+            line-height: 1.9;
+            color: var(--ta-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .about-body-text-mb {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlight {
+            color: var(--ta-green-dark);
+        }
+
+        .value-pills-wrap {
+            margin-bottom: 1.5rem;
+        }
+
+        .value-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--ta-green-light);
+            color: var(--ta-green-dark);
+            border-radius: 20px;
+            padding: 0.6rem 1rem;
+            line-height: 1rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin: 3px;
+        }
+
+        .founder-card {
+            background: var(--ta-sand);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            border-left: 4px solid var(--ta-green);
+            animation: toggleOpen 0.9s ease-out 0.5s both;
+            max-height: 190px;
+        }
+
+        .founder-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--ta-green);
+            flex-shrink: 0;
+        }
+
+        .founder-name {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--ta-navy);
+        }
+
+        .founder-role {
+            font-size: 0.78rem;
+            color: var(--ta-green);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .founder-quote {
+            font-size: 0.9rem;
+            color: var(--ta-muted);
+            font-style: italic;
+            margin-top: 0.3rem;
+            line-height: 1.5;
+        }
+
+        /* ===== STRUCTURE ===== */
+        #structure {
+            background: var(--ta-sand);
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin-top: 3rem;
+            transition-delay: 0.1s;
+        }
+
+        .org-level {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .org-level-wide {
+            gap: 3rem;
+        }
+
+        .org-level.org-level-wide::before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            border-left: 2px solid var(--ta-green);
+            height: 100%;
+        }
+
+        .org-level-tight {
+            gap: 1rem;
+        }
+
+        .org-node {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            /* border: 2px solid transparent; */
+            border: 0px;
+            transition: all 0.3s;
+            position: relative;
+            min-width: 130px;
+        }
+
+        .org-node::after {
+            content: '';
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--ta-green), var(--ta-sky));
+        }
+
+        .org-node:hover {
+            border: 1px solid var(--ta-green);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lift);
+        }
+
+        .org-node.root {
+            background: linear-gradient(135deg, var(--ta-navy), var(--ta-navy-mid));
+            color: white;
+            padding: 1.2rem 2rem;
+            font-size: 1.05rem;
+            border-radius: 20px;
+        }
+
+        .org-node.root .org-node-icon {
+            color: var(--ta-gold);
+        }
+
+        .org-node.root .org-node-title {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .org-node.root .org-node-sub {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.72rem;
+            margin-top: 3px;
+        }
+
+        .org-node.level2 {
+            border-top: 3px solid var(--ta-green);
+        }
+
+        .org-node.level2-sky {
+            border-top: 3px solid var(--ta-sky);
+        }
+
+        .org-node.level3 {
+            border-top: 3px solid var(--ta-sky);
+            min-width: 120px;
+        }
+
+        .org-node.members {
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--ta-orange), #e05c00);
+            color: white;
+            padding: 0.7rem 2.5rem;
+            border: none;
+        }
+
+        .org-node.members .org-node-title {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .org-node.members .org-node-title .countUp {
+            min-width: 3.45rem;
+            display: inline-block;
+            margin-top: -0.15rem;
+        }
+
+        .org-node.members .org-node-icon {
+            color: var(--ta-gold);
+        }
+
+        .org-node-icon {
+            font-size: 1.6rem;
+            color: var(--ta-green);
+            margin-bottom: 0.4rem;
+        }
+
+        .org-node-icon-sky {
+            color: var(--ta-sky);
+        }
+
+        .org-node-icon-orange {
+            color: var(--ta-orange);
+            font-size: 1.3rem;
+        }
+
+        .org-node-title {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--ta-navy);
+            line-height: 1.3;
+        }
+
+        .org-node-sub {
+            font-size: 0.72rem;
+            color: var(--ta-muted);
+            margin-top: 3px;
+        }
+
+        .org-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 40px;
+            justify-content: center;
+            position: relative;
+        }
+
+        .org-connector::before {
+            content: '';
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--ta-green), var(--ta-sky));
+        }
+
+        .org-connector-arrow {
+            color: var(--ta-green);
+            font-size: 1rem;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .org-h-line {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ta-sky), transparent);
+            margin: 0 auto 20px;
+        }
+
+        /* ===== EVENTS / GALLERY ===== */
+        #events {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 3rem;
+            transition-delay: 0.1s;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .gallery-item:nth-child(1),
+        .gallery-item:nth-child(4),
+        .gallery-item:nth-child(5) {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            min-height: 220px;
+        }
+
+        .gallery-item:nth-child(1) img,
+        .gallery-item:nth-child(4) img,
+        .gallery-item:nth-child(5) img {
+            min-height: 280px;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.07);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem;
+            background: linear-gradient(transparent, rgba(21, 41, 64, 0.85));
+            color: white;
+            transform: translateY(6px);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .gallery-caption-date {
+            font-size: 0.73rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 2px;
+        }
+
+        .gallery-tag {
+            display: inline-block;
+            background: var(--ta-orange);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== NEWS ===== */
+        #news {
+            background: var(--ta-sand);
+        }
+
+        .news-list {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition-delay: 0.1s;
+        }
+
+        .news-item {
+            background: white;
+            border-radius: 14px;
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            border-left-color: var(--ta-green);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-lift);
+        }
+
+        .news-date-box {
+            background: var(--ta-navy);
+            color: white;
+            border-radius: 10px;
+            padding: 0.4rem 0.7rem;
+            text-align: center;
+            flex-shrink: 0;
+            min-width: 52px;
+        }
+
+        .news-date-day {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .news-date-month {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--ta-gold);
+            text-transform: uppercase;
+        }
+
+        .news-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-event {
+            background: #e8f4fd;
+            color: var(--ta-sky);
+        }
+
+        .badge-notice {
+            background: #fff3eb;
+            color: var(--ta-orange);
+        }
+
+        .badge-activity {
+            background: var(--ta-green-light);
+            color: var(--ta-green-dark);
+        }
+
+        .badge-hot {
+            background: #ffeaea;
+            color: #e53e3e;
+        }
+
+        .news-title {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--ta-navy);
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            font-size: 0.82rem;
+            color: var(--ta-muted);
+            margin-top: 3px;
+        }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            background: white;
+        }
+
+        /* info card */
+        .contact-info-card {
+            background: linear-gradient(160deg, var(--ta-navy), var(--ta-navy-mid));
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            color: white;
+            height: 100%;
+        }
+
+        .contact-info-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-title-icon {
+            color: var(--ta-gold);
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.4rem;
+        }
+
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ta-gold);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-label {
+            font-size: 0.72rem;
+            color: var(--ta-white-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .contact-info-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .contact-info-note {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-info-note-sm {
+            font-size: 0.82rem;
+            color: var(--ta-white-dim);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        /* social buttons */
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.25s;
+        }
+
+        .social-btn-sm {
+            width: 34px;
+            height: 34px;
+            font-size: 0.85rem;
+        }
+
+        .social-btn-fb {
+            background: #1877f2;
+        }
+
+        .social-btn-ig {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-btn-line {
+            background: #00b900;
+        }
+
+        .social-btn-yt {
+            background: #ff0000;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        /* map */
+        .map-container {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lift);
+            height: 100%;
+            min-height: 420px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 420px;
+            display: block;
+        }
+
+        .map-col-delay {
+            transition-delay: 0.2s;
+        }
+
+        /* contact form (full-width row below) */
+        .contact-form-row {
+            margin-top: 2rem;
+        }
+
+        .contact-form-wrap {
+            background: var(--ta-sand);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        .contact-form-title {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            color: var(--ta-navy);
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-form-title-icon {
+            color: var(--ta-green);
+        }
+
+        .contact-form-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.5rem;
+        }
+
+        .contact-form-msg {
+            grid-column: span 2;
+        }
+
+        .contact-form-actions {
+            grid-column: span 2;
+        }
+
+        .form-label-ta {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--ta-navy);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control-ta {
+            border: 2px solid #e8edf2;
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.25s;
+            background: white;
+            width: 100%;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .form-control-ta:focus {
+            border-color: var(--ta-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 170, 108, 0.15);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-green-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            font-weight: 800;
+            font-size: 0.95rem;
+            font-family: 'Nunito', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(0, 170, 108, 0.35);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 170, 108, 0.45);
+        }
+
+        /* ===== FOOTER ===== */
+        #footer {
+            background: var(--ta-navy);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-text {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .footer-brand-sub {
+            font-size: 0.7rem;
+            color: var(--ta-green);
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .footer-social-row {
+            margin-top: 0.75rem;
+        }
+
+        .footer-heading {
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--ta-green);
+        }
+
+        .footer-info-list {
+            font-size: 0.82rem;
+            color: var(--ta-white-dim);
+            line-height: 1.9;
+        }
+
+        .footer-info-icon {
+            color: var(--ta-green);
+        }
+
+        .footer-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0 1rem;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+        }
+
+        .footer-policy-link {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+        }
+
+        /* ===== MODAL ===== */
+        .bg-register-title {
+            background: linear-gradient(135deg, var(--ta-sky), #2471a3) !important;
+        }
+
+        .bg-login-title {
+            background: linear-gradient(135deg, var(--ta-green), var(--ta-green-dark)) !important;
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .modal-terms-title {
+            font-family: 'Noto Serif TC', serif;
+            color: var(--ta-navy);
+            margin-bottom: 1rem;
+        }
+
+        .modal-terms {
+            color: var(--ta-muted);
+        }
+
+        .modal-terms-label {
+            color: var(--ta-muted);
+        }
+
+        .modal-login-body {
+            padding: 2rem;
+        }
+
+        .modal-login-center {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-login-welcome {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            color: var(--ta-navy);
+        }
+
+        .modal-login-hint {
+            font-size: 0.8rem;
+            color: var(--ta-muted);
+        }
+
+        .modal-remember-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-remember-label {
+            font-size: 0.82rem;
+            color: var(--ta-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .modal-forgot-link {
+            font-size: 0.82rem;
+            color: var(--ta-sky);
+            text-decoration: none;
+        }
+
+        .modal-footer-flex {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal-register-link {
+            font-size: 0.82rem;
+            color: var(--ta-muted);
+            text-decoration: none;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes toggleOpen {
+            from {
+                opacity: 0;
+                max-width: 0;
+            }
+
+            to {
+                opacity: 1;
+                max-width: 100%;
+            }
+        }
+
+        .wow {
+            animation-fill-mode: both;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(5) {
+                grid-column: span 2;
+            }
+
+            .about-accent-img {
+                display: none;
+            }
+
+            .about-badge-float {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .contact-form-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-msg,
+            .contact-form-actions {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-stat:nth-child(2n+1) {
+                min-width: inherit;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(5) {
+                grid-column: span 1;
+            }
+
+            .nav-link .fa-solid {
+                display: inline-block;
+                margin-right: 0.5rem !important
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <div id="navbar">
+        <nav class="navbar navbar-expand-md">
+            <a class="navbar-brand-custom" href="#">
+                <div class="brand-logo"><i class="fa-solid fa-compass"></i></div>
+                <div>
+                    <div class="brand-text-main">台中旅遊愛好者協會</div>
+                    <div class="brand-text-sub">Travel Together · Explore More</div>
+                </div>
+            </a>
+            <button class="navbar-toggler ms-auto me-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-house-chimney me-1"></i>首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="fa-solid fa-users me-1"></i>關於我們</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#structure"><i class="fa-solid fa-sitemap me-1"></i>組織架構</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#events"><i class="fa-solid fa-images me-1"></i>活動花絮</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news"><i class="fa-solid fa-bullhorn me-1"></i>最新消息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact"><i class="fa-solid fa-envelope me-1"></i>聯絡我們</a>
+                    </li>
+                </ul>
+                <div id="acc_container" class="d-none">
+                    <div class="d-inline-block mx-2" id="login_name"></div>
+                    <button class="btn btn-logout btn-sm" onclick="handleLogout()">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>登出
+                    </button>
+                </div>
+                <div id="login_container" class="py-2">
+                    <button class="btn btn-register btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <i class="fa-solid fa-address-card me-1"></i>註冊
+                    </button>
+                    <button class="btn btn-login btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>登入
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ===== BANNER / HERO ===== -->
+    <section id="banner">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="hero-badge">✦ 台中最大旅遊社群 ✦</span>
+            <h1 class="hero-title"><span class="wow animate__fadeInRightBig" data-wow-duration="0.8s"
+                    data-wow-delay="0s" data-wow-iteration="1">探索世界之美</span><br><span class="wow animate__fadeInLeftBig"
+                    data-wow-duration="0.8s" data-wow-delay="0.2s" data-wow-iteration="1">從台中出發</span></h1>
+            <p class="hero-subtitle">
+                我們是一群熱愛旅遊的夥伴，相信旅行不只是移動，而是心靈的拓展與生命的豐盛。
+                加入我們，與家人朋友一起探索這個世界的無限可能。
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number countUp">2,400<span class="hero-stat-number-sup">+</span></div>
+                    <div class="hero-stat-label">活躍會員</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number hero-stat-sep">|</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number countUp">180<span class="hero-stat-number-sup">+</span></div>
+                    <div class="hero-stat-label">年度活動</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number hero-stat-sep">|</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number countUp">38<span class="hero-stat-number-sup">+</span></div>
+                    <div class="hero-stat-label">國家足跡</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#about" class="btn-hero-primary"><i class="fa-solid fa-compass"></i> 探索協會</a>
+                <a href="#events" class="btn-hero-secondary"><i class="fa-solid fa-play"></i> 精彩回顧</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span class="hero-scroll-label">向下滾動</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ===== TRUST STRIP ===== -->
+    <div class="trust-strip">
+        <div class="container">
+            <div class="row text-center gy-2">
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center">
+                        <i class="fa-solid fa-shield-halved"></i><span>安心有保障</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center">
+                        <i class="fa-solid fa-face-smile-beam"></i><span>歡樂同遊</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center">
+                        <i class="fa-solid fa-people-roof"></i><span>親子共遊</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="trust-item justify-content-center">
+                        <i class="fa-solid fa-star"></i><span>評分 4.9 / 5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <div class="about-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=800&q=80" alt="旅遊夥伴"
+                            class="about-main-img">
+                        <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="家庭旅遊"
+                            class="about-accent-img wow animate__fadeInUp" data-wow-duration="1s">
+                        <div class="about-badge-float wow animate__jackInTheBox" data-wow-duration="1s"
+                            data-wow-delay="0.5s">
+                            <div class="num">12</div>
+                            <div class="lbl">年資歷</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal about-col-right">
+                    <div class="section-eyebrow">✦ Our Story</div>
+                    <h2 class="section-title">關於我們<br>旅行，是我們的語言</h2>
+                    <div class="divider-green"></div>
+                    <p class="about-body-text">
+                        台中旅遊愛好者協會成立於 2014 年，由一群熱愛旅遊的台中在地朋友攜手創辦。
+                        我們相信，旅行不僅是探索外在世界的方式，更是連結人心、創造美好回憶的媒介。
+                        無論是山林健行、海島浮潛、文化古蹟巡禮，或是帶孩子認識世界——旅行讓家庭更緊密，讓生命更豐盛。
+                    </p>
+                    <p class="about-body-text about-body-text-mb">
+                        十二年來，我們從最初十幾個熱情成員，成長為超過 2,400 位活躍會員的大家庭。
+                        我們每年舉辦超過 180 場活動，足跡遍及 38 個國家，是台中最具影響力的旅遊社群。
+                        我們的核心精神是：<br><strong class="about-highlight">信任、享受、放鬆、興奮與活力</strong> —— <i>讓每一段旅程都成為難忘的故事</i>。
+                    </p>
+                    <div class="value-pills-wrap">
+                        <span class="value-pill"><i class="fa-solid fa-heart"></i> 信任安全</span>
+                        <span class="value-pill"><i class="fa-solid fa-sun"></i> 歡樂享受</span>
+                        <span class="value-pill"><i class="fa-solid fa-leaf"></i> 放鬆療癒</span>
+                        <span class="value-pill"><i class="fa-solid fa-bolt"></i> 活力探險</span>
+                        <span class="value-pill"><i class="fa-solid fa-people-roof"></i> 親子共遊</span>
+                    </div>
+                    <div class="founder-card wow animate__toggleOpen" data-wow-duration="0.9s">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="創辦人"
+                            class="founder-avatar wow animate__fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.6s">
+                        <div>
+                            <div class="founder-role wow animate__fadeInUp" data-wow-duration="0.5s"
+                                data-wow-delay="1s">✦ Founder &amp; President</div>
+                            <div class="founder-name wow animate__fadeInUp" data-wow-duration="0.5s"
+                                data-wow-delay="1s">陳旅峰 Thomas Chen</div>
+                            <div class="founder-quote wow animate__fadeInUp" data-wow-duration="0.5s"
+                                data-wow-delay="1.2s">
+                                「我想建立一個地方，讓台中人能放心、快樂地探索世界。旅行不需要昂貴，只需要一顆願意出發的心。」
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STRUCTURE ===== -->
+    <section id="structure">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-eyebrow">✦ Organization</div>
+                <h2 class="section-title">組織架構</h2>
+                <div class="divider-green mx-auto"></div>
+                <p class="section-desc mx-auto">
+                    我們建立了清晰的組織架構，確保每一位成員都能獲得最好的服務與支持，讓協會持續茁壯成長。
+                </p>
+            </div>
+
+            <div class="org-chart reveal">
+                <div class="org-level">
+                    <div class="org-node root">
+                        <div class="org-node-icon"><i class="fa-solid fa-compass"></i></div>
+                        <div class="org-node-title">台中旅遊愛好者協會</div>
+                        <div class="org-node-sub">創立 2012 年</div>
+                    </div>
+                </div>
+                <div class="org-connector">
+                    <div class="org-connector-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="org-level org-level-wide">
+                    <div class="org-node level2">
+                        <div class="org-node-icon"><i class="fa-solid fa-user-tie"></i></div>
+                        <div class="org-node-title">理事長</div>
+                        <div class="org-node-sub">陳旅峰 理事長</div>
+                    </div>
+                    <div class="org-node level2 level2-sky">
+                        <div class="org-node-icon org-node-icon-sky"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="org-node-title">監事會</div>
+                        <div class="org-node-sub">監督協會運作</div>
+                    </div>
+                </div>
+                <div class="org-connector">
+                    <div class="org-connector-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="org-h-line"></div>
+                <div class="org-level org-level-tight">
+                    <div class="org-node level3">
+                        <div class="org-node-icon org-node-icon-orange"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="org-node-title">活動企劃部</div>
+                        <div class="org-node-sub">行程規劃<br>活動執行</div>
+                    </div>
+                    <div class="org-node level3">
+                        <div class="org-node-icon org-node-icon-orange"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="org-node-title">行銷公關部</div>
+                        <div class="org-node-sub">社群媒體<br>品牌推廣</div>
+                    </div>
+                    <div class="org-node level3">
+                        <div class="org-node-icon org-node-icon-orange"><i class="fa-solid fa-coins"></i></div>
+                        <div class="org-node-title">財務管理部</div>
+                        <div class="org-node-sub">預算規劃<br>財務報告</div>
+                    </div>
+                    <div class="org-node level3">
+                        <div class="org-node-icon org-node-icon-orange"><i class="fa-solid fa-people-group"></i></div>
+                        <div class="org-node-title">會員服務部</div>
+                        <div class="org-node-sub">會員管理<br>客服支援</div>
+                    </div>
+                    <div class="org-node level3">
+                        <div class="org-node-icon org-node-icon-orange"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="org-node-title">數位資訊部</div>
+                        <div class="org-node-sub">網站維護<br>數位管理</div>
+                    </div>
+                </div>
+                <div class="org-connector">
+                    <div class="org-connector-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="org-level">
+                    <div class="org-node members">
+                        <div class="org-node-title">
+                            <i class="fa-solid fa-users org-node-icon"></i> 全體會員 <span
+                                class="fs-5 countUp">2,400</span>+ 位
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EVENTS / GALLERY ===== -->
+    <section id="events">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-eyebrow">✦ Photo Gallery</div>
+                <h2 class="section-title">活動花絮</h2>
+                <div class="divider-green mx-auto"></div>
+                <p class="section-desc mx-auto">
+                    每一張照片都是一段故事，每一次出發都是一次蛻變。回顧我們最美麗的旅遊足跡。
+                </p>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80" alt="阿里山日出健行">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">山林健行</div>
+                        <div class="gallery-caption-title">🏔️ 阿里山日出健行之旅</div>
+                        <div class="gallery-caption-date">2025年11月 · 43人參與</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=80" alt="小琉球潛水">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">海島探索</div>
+                        <div class="gallery-caption-title">🐠 小琉球浮潛體驗</div>
+                        <div class="gallery-caption-date">2025年8月 · 28人參與</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80" alt="日本京都賞楓">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">海外旅遊</div>
+                        <div class="gallery-caption-title">🍁 日本京都賞楓深度遊</div>
+                        <div class="gallery-caption-date">2025年11月 · 62人參與</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=900&q=80" alt="衝浪體驗">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">活力體驗</div>
+                        <div class="gallery-caption-title">🏄 墾丁衝浪挑戰 — 初學者也能乘風破浪！</div>
+                        <div class="gallery-caption-date">2025年7月 · 35人參與</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593526613712-7b4b9a707330?w=600&q=80" alt="親子露營">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">親子活動</div>
+                        <div class="gallery-caption-title">⛺ 清境農場親子露營趣</div>
+                        <div class="gallery-caption-date">2025年5月 · 18個家庭</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=600&q=80" alt="夕陽海灘">
+                    <div class="gallery-caption">
+                        <div class="gallery-tag">療癒放鬆</div>
+                        <div class="gallery-caption-title">🌅 七股夕陽沙洲慢遊</div>
+                        <div class="gallery-caption-date">2025年3月 · 52人參與</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWS ===== -->
+    <section id="news">
+        <div class="container">
+            <div class="row align-items-center mb-4 reveal">
+                <div class="col">
+                    <div class="section-eyebrow">✦ Latest News</div>
+                    <h2 class="section-title">最新消息</h2>
+                    <div class="divider-green"></div>
+                </div>
+            </div>
+            <div class="news-list reveal">
+                <div class="news-item">
+                    <div class="news-date-box">
+                        <div class="news-date-day">15</div>
+                        <div class="news-date-month">Apr</div>
+                    </div>
+                    <div><span class="news-badge badge-hot">🔥 熱門</span>
+                        <div class="news-title">【報名開始】2026年夏季日本北海道花海之旅，限額50名早鳥優惠開跑！</div>
+                        <div class="news-excerpt">七月盛夏，美瑛富良野的薰衣草田等著你。含來回機票、四星酒店，早鳥優惠限時三天。</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date-box">
+                        <div class="news-date-day">10</div>
+                        <div class="news-date-month">Apr</div>
+                    </div>
+                    <div><span class="news-badge badge-activity">活動公告</span>
+                        <div class="news-title">五月份親子自然探索營——玉山國家公園一日遊活動報名中</div>
+                        <div class="news-excerpt">適合5歲以上孩童，專業導覽員帶隊，讓孩子在大自然中學習、成長、玩樂。</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date-box">
+                        <div class="news-date-day">05</div>
+                        <div class="news-date-month">Apr</div>
+                    </div>
+                    <div><span class="news-badge badge-event">精彩回顧</span>
+                        <div class="news-title">【活動回顧】3月清明連假花東縱谷騎行之旅，超過85人共同完成壯舉！</div>
+                        <div class="news-excerpt">三天兩夜，沿著花東縱谷單車道，在稻田與山巒間穿行，留下最美麗的春日記憶。</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date-box">
+                        <div class="news-date-day">28</div>
+                        <div class="news-date-month">Mar</div>
+                    </div>
+                    <div><span class="news-badge badge-notice">重要通知</span>
+                        <div class="news-title">協會2026年度會員大會暨頒獎典禮將於4月26日舉行，歡迎全體會員出席</div>
+                        <div class="news-excerpt">本年度最精彩的聚會！回顧協會成就，表揚優秀會員，並公布2026年下半年度活動規劃。</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">20</div>
+                        <div class="news-date-month">Mar</div>
+                    </div>
+                    <div><span class="news-badge badge-activity">合作資訊</span>
+                        <div class="news-title">協會正式與台中市觀光旅遊局簽訂策略合作協議，共同推廣在地深度旅遊</div>
+                        <div class="news-excerpt">此合作將為會員帶來更多在地體驗優惠，並共同打造台中旅遊新亮點。</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">15</div>
+                        <div class="news-date-month">Mar</div>
+                    </div>
+                    <div><span class="news-badge badge-event">徵才啟事</span>
+                        <div class="news-title">活動企劃部徵求志工幹部！歡迎熱愛旅遊的你加入我們的核心團隊</div>
+                        <div class="news-excerpt">名額有限，提供完整培訓課程。加入我們，讓你的旅遊熱情成為影響他人的力量。</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">08</div>
+                        <div class="news-date-month">Mar</div>
+                    </div>
+                    <div><span class="news-badge badge-hot">🔥 熱門</span>
+                        <div class="news-title">【新增行程】六月馬來西亞亞庇浮潛＋婆羅洲雨林五天四夜套裝，超值優惠！</div>
+                        <div class="news-excerpt">探索東南亞最後的原始雨林，與紅毛猩猩相遇，享受透明海水的震撼之美。</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">01</div>
+                        <div class="news-date-month">Mar</div>
+                    </div>
+                    <div><span class="news-badge badge-notice">公告</span>
+                        <div class="news-title">2026年春季協會月費繳納提醒，請於3月31日前完成繳費以維持會員資格</div>
+                        <div class="news-excerpt">提供線上轉帳、超商繳費等多元方式。若有疑問請洽會員服務部。</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">18</div>
+                        <div class="news-date-month">Feb</div>
+                    </div>
+                    <div><span class="news-badge badge-activity">活動回顧</span>
+                        <div class="news-title">【精彩回顧】2026元宵花燈台南賞花趣，與400位旅伴一起漫步燈海</div>
+                        <div class="news-excerpt">年度最受歡迎的在地文化活動，現場拍攝大量精彩照片已上傳至粉絲頁，快來尋找自己的身影！</div>
+                    </div>
+                </div>
+                <div class="news-item d-none">
+                    <div class="news-date-box">
+                        <div class="news-date-day">05</div>
+                        <div class="news-date-month">Feb</div>
+                    </div>
+                    <div><span class="news-badge badge-event">新春公告</span>
+                        <div class="news-title">新春快樂！蛇年協會全體成員開工大吉，感謝逾2,400位會員的支持與信任</div>
+                        <div class="news-excerpt">新的一年，協會將推出更多精彩活動，讓我們繼續攜手探索世界的美好！期待與你同行。</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center m-4 reveal">
+                <div class="col text-end">
+                    <a href="" class="btn btn-outline-success rounded-pill" id="btn-allNews">
+                        查看全部 <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <div class="container">
+
+            <!-- Header -->
+            <div class="text-center reveal">
+                <div class="section-eyebrow">✦ Get In Touch</div>
+                <h2 class="section-title">聯絡我們</h2>
+                <div class="divider-green mx-auto"></div>
+                <p class="section-desc mx-auto">
+                    無論是加入詢問、活動合作，還是旅遊建議，我們的團隊都非常樂意為你解答！
+                </p>
+            </div>
+
+            <!-- Row 1: Contact info card (left) + Map (right) -->
+            <div class="row g-4 mt-3 align-items-stretch">
+                <div class="col-12 col-md-6 reveal">
+                    <div class="contact-info-card">
+                        <div class="contact-info-title">
+                            <i class="fa-solid fa-compass me-2 contact-info-title-icon"></i>台中旅遊愛好者協會
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <div class="contact-info-label">地址</div>
+                                <div class="contact-info-value">
+                                    台中市西區自由路一段101號5樓<br>
+                                    <span class="contact-info-note">Ta-Chung Travel Association, 5F No.101 Ziyou Rd.
+                                        Sec.1, West Dist.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <div class="contact-info-label">電話</div>
+                                <div class="contact-info-value"><a href="tel:04-2235-8899">04-2235-8899</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <div class="contact-info-label">電子郵件</div>
+                                <div class="contact-info-value"><a
+                                        href="emailto:info@tctravel.org.tw">info@tctravel.org.tw</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+                            <div>
+                                <div class="contact-info-label">服務時間</div>
+                                <div class="contact-info-value">
+                                    週一至週五 09:00–18:00<br>
+                                    <span class="contact-info-note-sm">週末及例假日休息</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-social">
+                            <a href="#" class="social-btn social-btn-fb" title="Facebook"><i
+                                    class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn social-btn-ig" title="Instagram"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="social-btn social-btn-line" title="LINE"><i
+                                    class="fa-brands fa-line"></i></a>
+                            <a href="#" class="social-btn social-btn-yt" title="YouTube"><i
+                                    class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 reveal map-col-delay">
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.5!2d120.6736!3d24.1444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346919f12dd7e1e7%3A0x601a7eede1c0a1ef!2z5Y-w5Lit5biC6KW_5Y6f6Lev5LiA5q61MTAx6Jmf!5e0!3m2!1szh-TW!2stw!4v1699000000000!5m2!1szh-TW!2stw"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            title="台中旅遊愛好者協會位置">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Contact form (full width col-12) -->
+            <div class="row contact-form-row">
+                <div class="col-12 reveal">
+                    <div class="contact-form-wrap">
+                        <h5 class="contact-form-title">
+                            <i class="fa-solid fa-paper-plane me-2 contact-form-title-icon"></i>傳送訊息給我們
+                        </h5>
+                        <div class="contact-form-fields">
+                            <div>
+                                <label class="form-label-ta" for="ct-name">您的姓名</label>
+                                <input type="text" class="form-control-ta" id="ct-name" placeholder="請輸入您的姓名">
+                            </div>
+                            <div>
+                                <label class="form-label-ta" for="ct-email">電子郵件地址</label>
+                                <input type="email" class="form-control-ta" id="ct-email" placeholder="your@email.com">
+                            </div>
+                            <div class="contact-form-msg">
+                                <label class="form-label-ta" for="ct-msg">留言內容</label>
+                                <textarea class="form-control-ta" id="ct-msg" rows="4"
+                                    placeholder="有任何問題或建議，歡迎告訴我們…"></textarea>
+                            </div>
+                            <div class="contact-form-actions">
+                                <button class="btn-submit" onclick="handleContactSubmit()">
+                                    <i class="fa-solid fa-paper-plane me-2"></i>送出訊息
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <section id="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand-row">
+                        <div class="brand-logo"><i class="fa-solid fa-compass"></i></div>
+                        <div>
+                            <div class="footer-logo-text">台中旅遊愛好者協會</div>
+                            <div class="footer-brand-sub">Travel Together · Explore More</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">
+                        致力於推廣旅遊文化，連結每一位熱愛旅行的朋友。自2012年成立以來，陪伴超過2,400位成員探索世界。
+                    </p>
+                    <div class="d-flex gap-2 footer-social-row">
+                        <a href="#" class="social-btn social-btn-fb social-btn-sm" title="Facebook"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn social-btn-ig social-btn-sm" title="Instagram"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn social-btn-line social-btn-sm" title="LINE"><i
+                                class="fa-brands fa-line"></i></a>
+                        <a href="#" class="social-btn social-btn-yt social-btn-sm" title="YouTube"><i
+                                class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-lg-2">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="footer-heading">快速連結</div>
+                            <a href="#about" class="footer-link">關於我們</a>
+                            <a href="#structure" class="footer-link">組織架構</a>
+                            <a href="#events" class="footer-link">活動花絮</a>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="footer-heading d-none d-sm-block"> &nbsp;</div>
+                            <a href="#news" class="footer-link">最新消息</a>
+                            <a href="#contact" class="footer-link">聯絡我們</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 ms-sm-auto col-lg-2">
+                    <div class="footer-heading">會員服務</div>
+                    <a href="#" class="footer-link" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">會員登入</a>
+                    <a href="#" class="footer-link" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">申請加入</a>
+                    <!-- <a href="#" class="footer-link">活動報名</a>
+                    <a href="#" class="footer-link">繳費說明</a>
+                    <a href="#" class="footer-link">常見問題</a> -->
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer-heading">協會資訊</div>
+                    <div class="footer-info-list">
+                        <div><i class="fa-solid fa-location-dot me-2 footer-info-icon"></i>台中市西區自由路一段101號5樓</div>
+                        <div><i class="fa-solid fa-phone me-2 footer-info-icon"></i><a
+                                href="tel:04-2235-8899">04-2235-8899</a></div>
+                        <div><i class="fa-solid fa-envelope me-2 footer-info-icon"></i><a
+                                href="mailto:info@tctravel.org.twß">info@tctravel.org.tw</a></div>
+                        <div><i class="fa-solid fa-clock me-2 footer-info-icon"></i>週一至週五 09:00–18:00</div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-copy">
+                © 2026 台中旅遊愛好者協會 Taiwan Taichung Travel Enthusiasts Association. All rights reserved.
+                &nbsp;|&nbsp; <a href="#" class="footer-policy-link">隱私政策</a>
+                &nbsp;|&nbsp; <a href="#" class="footer-policy-link">服務條款</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REGISTER MODAL ===== -->
+    <div class="modal modal-xl fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-register-title text-white">
+                    <h1 class="modal-title fs-5" id="registerModalLabel">
+                        <i class="fa-solid fa-address-card me-2"></i>加入協會
+                    </h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="h5 modal-terms-title">粉絲會員註冊條款</div>
+                            <ol class="small modal-terms">
+                                <li><b>資格要求</b><br>僅限年滿18歲以上之個人，未成年人需經監護人同意。</li>
+                                <li><b>真實資料</b><br>註冊時必須提供正確、完整且最新的個人資訊，不得冒用或偽造。</li>
+                                <li><b>帳號安全</b><br>粉絲需妥善保管帳號與密碼，因疏忽造成之損失由粉絲自行承擔。</li>
+                                <li><b>使用規範</b><br>粉絲不得利用系統進行任何違法、侵權或不當行為，違者協會有權暫停或終止其資格。</li>
+                                <li><b>條款修改</b><br>協會保留隨時修改本條款之權利，修改後將公告於官網並立即生效。</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label class="form-label-ta">帳號（用戶名稱）</label>
+                                    <input type="text" class="form-control-ta" name="name" id="reg-name"
+                                        placeholder="輸入帳號">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label-ta">密碼</label>
+                                    <input type="password" class="form-control-ta" name="password" id="reg-password"
+                                        placeholder="輸入密碼">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label-ta">確認密碼</label>
+                                    <input type="password" class="form-control-ta" name="confirmPwd" id="reg-confirmPwd"
+                                        placeholder="再次輸入密碼">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label-ta">電子郵件</label>
+                                    <input type="text" class="form-control-ta" name="email" id="reg-email"
+                                        placeholder="your@email.com">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="agreement" id="agreement">
+                                    <label class="form-check-label small modal-terms-label" for="agreement">
+                                        我已閱讀並同意上述會員條款與服務政策
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+
+                    <button type="button" class="btn-submit" id="btn-register" onclick="handleRegister()">
+                        <i class="fa-solid fa-address-card me-2"></i>提交申請
+                    </button>
+
+                    <button type="button" class="btn btn-outline-success btn-submit" id="btn-passkey-register"
+                        onclick="handlePasskeyRegister()">
+                        <i class="fa-solid fa-key me-2"></i>Passkey 註冊
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LOGIN MODAL ===== -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-login-title text-white">
+                    <h1 class="modal-title fs-5" id="loginModalLabel">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>會員登入
+                    </h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-login-body">
+                    <div class="modal-login-center">
+                        <div class="brand-logo brand-logo-lg mx-auto">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div class="modal-login-welcome">歡迎回來，旅遊夥伴！</div>
+                        <div class="modal-login-hint">登入後即可查看最新活動與會員專屬優惠</div>
+                    </div>
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label-ta">帳號</label>
+                            <input type="text" class="form-control-ta" name="name" id="log-name" placeholder="輸入帳號">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label-ta">密碼</label>
+                            <input type="password" class="form-control-ta" name="password" id="log-password"
+                                placeholder="輸入密碼">
+                        </div>
+                        <div class="modal-remember-row">
+                            <label class="modal-remember-label">
+                                <input type="checkbox"> 記住我
+                            </label>
+                            <a href="#" class="modal-forgot-link">忘記密碼？</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer modal-footer-flex">
+                    <a href="#" class="me-auto modal-register-link" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">
+                        <i class="fa-solid fa-address-card me-1"></i>尚未加入？立即註冊
+                    </a>
+
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+
+                        <button type="button" class="btn-submit" id="btn-login" onclick="handleLogin()">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>登入
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success btn-submit" id="btn-passkey-login"
+                            onclick="handlePasskeyLogin()">
+                            <i class="fa-solid fa-key me-2"></i>Passkey 登入
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- WebAuthn browser helper — exposes SimpleWebAuthnBrowser.startRegistration / startAuthentication -->
+    <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js"></script>
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/axios.min.js"></script>
+
+    <script>
+        try { new WOW().init(); } catch (e) { }
+
+        $(function () {
+            // Count up
+            const counterUp = window.counterUp.default
+
+            const callback = entries => {
+                entries.forEach(entry => {
+                    const el = entry.target
+                    if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+                        counterUp(el, {
+                            duration: 2000,
+                            delay: 50,
+                        })
+                        el.classList.add('is-visible')
+                    }
+                })
+            }
+
+            const IO = new IntersectionObserver(callback, { threshold: 1 })
+
+            $('.countUp').each(function () {
+                IO.observe(this);
+            })
+
+            // Scroll reveal
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        $(entry.target).addClass('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            $('.reveal').each(function () { observer.observe(this); });
+
+            // Smooth scroll
+            $('a[href="#"]').on('click', function (e) {
+                e.preventDefault();
+            });
+            $('a[href^="#"]').on('click', function (e) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    e.preventDefault();
+                    $('html, body').animate({ scrollTop: target.offset().top }, 600);
+                }
+            });
+
+            // Sticky nav shadow
+            $(window).on('scroll', function () {
+                var nav = $('#navbar .navbar');
+                if ($(this).scrollTop() > 40) {
+                    nav.css('box-shadow', '0 4px 30px rgba(0,0,0,0.12)');
+                } else {
+                    nav.css('box-shadow', '0 2px 20px rgba(0,170,108,0.1)');
+                }
+            });
+
+            // while animation finished
+            $('.wow').on('animationend', (e) => {
+                //console.log($(e.currentTarget));
+            });
+
+            let obj;
+            $('#btn-allNews').click((e) => {
+                e.preventDefault();
+                $(e.currentTarget).hide();
+                if ($('.news-item.d-none').length > 0) {
+                    let d = 0;
+                    //console.log($($('.news-item.d-none')[0]), $($('.news-item.d-none')[0]).prev(), $($('.news-item.d-none')[0]).prev().offset().top);
+                    //$('html, body').animate({ scrollTop: $($('.news-item.d-none')[0]).prev().offset().top }, 400);
+                    $('.news-item.d-none').each(function () {
+                        $(this).hide().removeClass('d-none').delay(d).fadeToggle(600);
+                        d += 600;
+                    });
+                }
+            });
+
+            handleMe();
+        });
+
+        function handleContactSubmit() {
+            var name = $('#ct-name').val().trim();
+            var email = $('#ct-email').val().trim();
+            var msg = $('#ct-msg').val().trim();
+            if (!name || !email || !msg) { alert('請填寫所有欄位！'); return; }
+
+            // post to backend
+            alert('感謝 ' + name + ' 的來信！我們將於2個工作天內回覆您。');
+            $('#ct-name, #ct-email, #ct-msg').val('');
+        }
+
+        function handleRegister() {
+            var name = $('#reg-name').val().trim();
+            var pwd = $('#reg-password').val();
+            var conf = $('#reg-confirmPwd').val();
+            var email = $('#reg-email').val().trim();
+            var agreed = $('#agreement').is(':checked');
+            if (!name || !pwd || !conf || !email) { alert('請完整填寫所有欄位。'); return; }
+            if (pwd !== conf) { alert('兩次密碼輸入不一致，請再確認。'); return; }
+            if (!agreed) { alert('請同意會員條款後再提交。'); return; }
+
+            axios.post(`${API}/auth/register/password`, {
+                username: name,
+                password: pwd,
+                email: email
+            }).then(function (response) {
+                // console.log("RESPONSE", response);
+                if (response.data.success) {
+                    localStorage.setItem('auth_token', response.data.token);
+                    alert(`註冊成功！歡迎加入，${response.data.user.username}！' 歡迎加入台中旅遊愛好者協會 !`);
+                    bootstrap.Modal.getInstance($('#registerModal')[0]).hide();
+                } else {
+                    alert(response.data.detail);
+                }
+            }).catch(function (e) {
+                if (e.response.data.detail)
+                    alert(e.response.data.detail);
+                // console.log(e);
+            }).finally(function () {
+            });
+        }
+
+        function handleLogin() {
+            var name = $('#log-name').val().trim();
+            var pwd = $('#log-password').val();
+            if (!name || !pwd) { alert('請輸入帳號與密碼。'); return; }
+
+            axios.post(`${API}/auth/login/password`, {
+                username: name,
+                password: pwd
+            }).then(function (response) {
+                // console.log(response);
+                if (response.data.success) {
+                    localStorage.setItem('auth_token', response.data.token);
+                    localStorage.setItem('auth_user', response.data.user);
+                    // console.log(result);
+                    $('#login_name').text(response.data.user.username);
+                    $('#login_container').hide();
+                    $('#acc_container').hide().removeClass('d-none').fadeIn(600);
+
+                    alert('歡迎回來，' + name + '！登入成功。');
+                    bootstrap.Modal.getInstance($('#loginModal')[0]).hide();
+                } else {
+                    if (e.response.data.detail)
+                        alert(e.response.data.detail);
+                }
+            }).catch(function (e) {
+                if (e.response.data.detail)
+                    alert(e.response.data.detail);
+                // console.log(e);
+            }).finally(function () {
+            });
+        }
+
+        // ── Passkey helpers ────────────────────────────────────────────────────
+        // Backend base URL — change this if your FastAPI server runs on a different port.
+        // const API = 'http://localhost:8000';
+        const API = '';
+
+        function setPasskeyBtnLoading(btnId, loading) {
+            const btn = document.getElementById(btnId);
+            btn.disabled = loading;
+            btn.innerHTML = loading
+                ? '<span class="spinner-border spinner-border-sm me-2"></span>處理中…'
+                : '<i class="fa-solid fa-key me-2"></i>' + (btnId === 'btn-passkey-register' ? 'Passkey 註冊' : 'Passkey 登入');
+        }
+
+        async function handlePasskeyRegister() {
+            const username = $('#reg-name').val().trim();
+            const email = $('#reg-email').val().trim();
+            const agreed = $('#agreement').is(':checked');
+
+            if (!username || !email) { alert('請填寫帳號與電子郵件後再使用 Passkey 註冊。'); return; }
+            if (!agreed) { alert('請同意會員條款後再提交。'); return; }
+
+            setPasskeyBtnLoading('btn-passkey-register', true);
+            try {
+                // Step 1 — ask server for a challenge
+                const startRes = await fetch(`${API}/auth/register/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email }),
+                });
+                const { session_id, options, detail } = await startRes.json();
+                if (!startRes.ok) throw new Error(detail || '無法取得 Passkey 選項');
+
+                // Step 2 — browser triggers biometric / PIN prompt and creates the credential
+                const credential = await SimpleWebAuthnBrowser.startRegistration({ optionsJSON: options });
+
+                // Step 3 — send the new credential to the server for verification & storage
+                const finishRes = await fetch(`${API}/auth/register/finish`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id, credential }),
+                });
+                const result = await finishRes.json();
+                if (!finishRes.ok) throw new Error(result.detail || '驗證失敗');
+
+                localStorage.setItem('auth_token', result.token);
+                alert(`Passkey 註冊成功！歡迎加入，${result.user.username}！`);
+                bootstrap.Modal.getInstance($('#registerModal')[0]).hide();
+
+            } catch (err) {
+                if (err.name === 'NotAllowedError') {
+                    alert('Passkey 操作已取消。');
+                } else {
+                    alert('錯誤：' + err.message);
+                }
+            } finally {
+                setPasskeyBtnLoading('btn-passkey-register', false);
+            }
+        }
+
+        async function handlePasskeyLogin() {
+            setPasskeyBtnLoading('btn-passkey-login', true);
+            try {
+                // Step 1 — get a challenge; no email needed (discoverable credentials)
+                const startRes = await fetch(`${API}/auth/login/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({}),
+                });
+                const { session_id, options, detail } = await startRes.json();
+                if (!startRes.ok) throw new Error(detail || '無法開始登入');
+
+                // Step 2 — browser shows all available passkeys for this site; user picks one
+                const credential = await SimpleWebAuthnBrowser.startAuthentication({ optionsJSON: options });
+
+                // Step 3 — server verifies the signed assertion
+                const finishRes = await fetch(`${API}/auth/login/finish`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id, credential }),
+                });
+                const result = await finishRes.json();
+                if (!finishRes.ok) throw new Error(result.detail || '登入失敗');
+
+                localStorage.setItem('auth_token', result.token);
+                localStorage.setItem('auth_user', result.user);
+                // console.log(result);
+                $('#login_name').text(result.user.username);
+                $('#login_container').hide();
+                $('#acc_container').hide().removeClass('d-none').fadeIn(600);
+
+                alert(`歡迎回來，${result.user.username}！`);
+                bootstrap.Modal.getInstance($('#loginModal')[0]).hide();
+
+            } catch (err) {
+                if (err.name === 'NotAllowedError') {
+                    alert('Passkey 操作已取消。');
+                } else {
+                    alert('錯誤：' + err.message);
+                }
+            } finally {
+                setPasskeyBtnLoading('btn-passkey-login', false);
+            }
+        }
+
+        function resetToLogin() {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('auth_user');
+            $('#acc_container').hide();
+            $('#login_container').fadeIn(600);
+        }
+
+        function resetToLogout(user) {
+            localStorage.setItem('auth_user', user);
+            $('#login_name').text(user.username);
+            $('#login_container').hide();
+            $('#acc_container').hide().removeClass('d-none').fadeIn(600);
+        }
+
+        async function handleLogout() {
+            try {
+                const apiRes = await fetch(`${API}/auth/logout`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: {},
+                });
+                const result = await apiRes.json();
+                if (!apiRes.ok) throw new Error(result.detail || '登出失敗');
+
+                if (result.success) {
+                    resetToLogin();
+                }
+            } catch (err) {
+                console.log(err);
+            } finally {
+            }
+        }
+
+        async function handleMe() {
+            try {
+                let token = localStorage.getItem('auth_token');
+                if (!token) {
+                    resetToLogin();
+                    return;
+                }
+                const apiRes = await fetch(`${API}/auth/me`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                });
+                const result = await apiRes.json();
+                if (apiRes.status === 401) {
+                    resetToLogin();
+                    return;
+                }
+                // console.log(result);
+                resetToLogout(result)
+            } catch (err) {
+                console.log(err);
+            } finally {
+            }
+        }
+    </script>
+</body>
+
+</html>
