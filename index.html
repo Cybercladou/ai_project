@@ -2099,10 +2099,11 @@
                 </div>
                 <div class="col-6 col-sm-4 ms-sm-auto col-lg-2">
                     <div class="footer-heading">會員服務</div>
-                    <a href="#" class="footer-link" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    <a href="" class="footer-link login-hide" data-bs-dismiss="modal" data-bs-toggle="modal"
                         data-bs-target="#loginModal">會員登入</a>
-                    <a href="#" class="footer-link" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    <a href="" class="footer-link login-hide" data-bs-dismiss="modal" data-bs-toggle="modal"
                         data-bs-target="#registerModal">申請加入</a>
+                    <a href="" class="footer-link logout-hide" onclick="handleLogout(event)">登出</a>
                     <!-- <a href="#" class="footer-link">活動報名</a>
                     <a href="#" class="footer-link">繳費說明</a>
                     <a href="#" class="footer-link">常見問題</a> -->
@@ -2360,6 +2361,7 @@
                 }
             });
 
+            $('.logout-hide').hide();
             handleMe();
         });
 
@@ -2417,12 +2419,7 @@
                 // console.log(response);
                 if (response.data.success) {
                     localStorage.setItem('auth_token', response.data.token);
-                    localStorage.setItem('auth_user', response.data.user);
-                    // console.log(result);
-                    $('#login_name').text(response.data.user.username);
-                    $('#login_container').hide();
-                    $('#acc_container').hide().removeClass('d-none').fadeIn(600);
-
+                    resetToLogout(response.data.user);
                     alert('歡迎回來，' + name + '！登入成功。');
                     bootstrap.Modal.getInstance($('#loginModal')[0]).hide();
                 } else {
@@ -2521,11 +2518,7 @@
                 if (!finishRes.ok) throw new Error(result.detail || '登入失敗');
 
                 localStorage.setItem('auth_token', result.token);
-                localStorage.setItem('auth_user', result.user);
-                // console.log(result);
-                $('#login_name').text(result.user.username);
-                $('#login_container').hide();
-                $('#acc_container').hide().removeClass('d-none').fadeIn(600);
+                resetToLogout(result.user);
 
                 alert(`歡迎回來，${result.user.username}！`);
                 bootstrap.Modal.getInstance($('#loginModal')[0]).hide();
@@ -2546,6 +2539,9 @@
             localStorage.removeItem('auth_user');
             $('#acc_container').hide();
             $('#login_container').fadeIn(600);
+
+            $('.logout-hide').hide();
+            $('.login-hide').show();
         }
 
         function resetToLogout(user) {
@@ -2553,9 +2549,13 @@
             $('#login_name').text(user.username);
             $('#login_container').hide();
             $('#acc_container').hide().removeClass('d-none').fadeIn(600);
+
+            $('.logout-hide').show();
+            $('.login-hide').hide();
         }
 
-        async function handleLogout() {
+        async function handleLogout(e) {
+            if (e) e.preventDefault();
             try {
                 const apiRes = await fetch(`${API}/auth/logout`, {
                     method: 'POST',
@@ -2566,6 +2566,7 @@
                 if (!apiRes.ok) throw new Error(result.detail || '登出失敗');
 
                 if (result.success) {
+                    alert(`下次見咯！`);
                     resetToLogin();
                 }
             } catch (err) {
