@@ -5,7 +5,6 @@ import os
 # For local dev: "localhost"
 # For production: "yourdomain.com"
 # RP_ID = os.getenv("RP_ID", "localhost")
-# RP_ID = os.getenv("RP_ID", "mower-return-wand.ngrok-free.dev")
 RP_ID = os.getenv("RP_ID", "cybercladou.github.io")
 # RP_ID = os.getenv("RP_ID", "bug-free-enigma-w9qpv976g5729pv7-8000.app.github.dev")
 RP_NAME = os.getenv("RP_NAME", "台中旅遊愛好者協會")
@@ -14,7 +13,6 @@ RP_NAME = os.getenv("RP_NAME", "台中旅遊愛好者協會")
 # For local dev: "http://localhost:8000"
 # For production: "https://yourdomain.com"
 # ORIGIN = os.getenv("ORIGIN", "http://localhost:8000")
-# ORIGIN = os.getenv("ORIGIN", "https://mower-return-wand.ngrok-free.dev")
 ORIGIN = os.getenv("ORIGIN", "https://cybercladou.github.io")
 # ORIGIN = os.getenv("ORIGIN", "https://bug-free-enigma-w9qpv976g5729pv7-8000.app.github.dev")
 
