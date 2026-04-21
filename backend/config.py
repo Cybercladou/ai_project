@@ -5,14 +5,18 @@ import os
 # For local dev: "localhost"
 # For production: "yourdomain.com"
 # RP_ID = os.getenv("RP_ID", "localhost")
-RP_ID = os.getenv("RP_ID", "cybercladou.github.io")
+# RP_ID = os.getenv("RP_ID", "cybercladou.github.io")
+RP_ID = os.getenv("RP_ID", "profile.pinch.com.tw")
+
 RP_NAME = os.getenv("RP_NAME", "台中旅遊愛好者協會")
 
 # The full origin the browser uses to reach your site.
 # For local dev: "http://localhost:8000"
 # For production: "https://yourdomain.com"
 # ORIGIN = os.getenv("ORIGIN", "http://localhost:8000")
-ORIGIN = os.getenv("ORIGIN", "https://cybercladou.github.io")
+# ORIGIN = os.getenv("ORIGIN", "https://cybercladou.github.io")
+ORIGIN = os.getenv("ORIGIN", "https://profile.pinch.com.tw")
+
 
 # JWT settings — set a long random secret in production
 JWT_SECRET = os.getenv("JWT_SECRET", "change-this-to-a-long-random-string-in-production")

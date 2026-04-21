@@ -23,6 +23,7 @@ app = FastAPI(
     title="台中旅遊愛好者協會 API",
     version="1.0.0",
     lifespan=lifespan,
+    root_path="/api",
 )
 
 # Allow the browser to call the API.
@@ -34,6 +35,7 @@ app.add_middleware(
         "http://localhost:8000",
         "http://127.0.0.1:8000",
         "https://cybercladou.github.io",
+        "https://profile.pinch.com.tw",
         "http://localhost:5500",   # VS Code Live Server
         "http://127.0.0.1:5500",
     ],
